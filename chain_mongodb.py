@@ -1,7 +1,6 @@
 import base64
 import io
 from pathlib import Path
-from decouple import config
 
 from langchain_openai import ChatOpenAI
 from langchain_community.vectorstores import Chroma
@@ -21,8 +20,8 @@ from langchain_community.vectorstores import MongoDBAtlasVectorSearch
 from langchain_openai import OpenAIEmbeddings
 from pymongo import MongoClient
 
-os.environ["OPENAI_API_KEY"] = os.environ("OPENAI_API_KEY")
-MONGODB_ATLAS_CLUSTER_URI = os.environ("MONGODB_CONN_STRING")
+OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
+MONGODB_ATLAS_CLUSTER_URI = os.environ['MONGODB_CONN_STRING']
 
 def format_docs(docs):
     return "\n\n".join([d.page_content for d in docs])
@@ -45,7 +44,7 @@ def rag_chain(retriever):
     prompt = ChatPromptTemplate.from_template(template)
  
     # Initialize the multi-modal Large Language Model with specific parameters
-    model = ChatOpenAI(temperature=0, model="gpt-4-vision-preview", max_tokens=1024, openai_api_key=config("OPENAI_API_KEY"))
+    model = ChatOpenAI(temperature=0, model="gpt-4-vision-preview", max_tokens=1024, openai_api_key=os.eniron['OPENAI_API_KEY'])
 
 
     # Define the RAG pipeline
@@ -61,9 +60,9 @@ def rag_chain(retriever):
 # initialize MongoDB python client
 client = MongoClient(MONGODB_ATLAS_CLUSTER_URI)
 
-DB_NAME = config("DB_NAME")
-COLLECTION_NAME = config("COLLECTION_NAME")
-ATLAS_VECTOR_SEARCH_INDEX_NAME = config("INDEX_NAME")
+DB_NAME = os.environ["DB_NAME"]
+COLLECTION_NAME = os.environ["COLLECTION_NAME"]
+ATLAS_VECTOR_SEARCH_INDEX_NAME = os.environ["INDEX_NAME"]
 
 MONGODB_COLLECTION = client[DB_NAME][COLLECTION_NAME]
 

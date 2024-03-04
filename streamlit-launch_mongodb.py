@@ -25,4 +25,4 @@ with st.form('my_form'):
 generate_response_terminal("What is the rubric for leads on a slide?")
 
 import os
-print(os.environ("OPENAI_API_KEY"))
+print(os.environ["OPENAI_API_KEY"])
