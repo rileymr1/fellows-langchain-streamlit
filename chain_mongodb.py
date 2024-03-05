@@ -1,7 +1,8 @@
-import base64
-import io
-from pathlib import Path
+# import base64
+# import io
+# from pathlib import Path
 
+import streamlit as st
 from langchain_openai import ChatOpenAI
 # from langchain_community.vectorstores import Chroma
 # from langchain_core.documents import Document
@@ -25,10 +26,24 @@ from pymongo import MongoClient
 # del os.environ['OPENAI_API_KEY']
 # load_dotenv()
 
+# -- Trying to access github secrets 1. Works locally.
 # OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
-# MONGODB_ATLAS_CLUSTER_URI = os.getenv('MONGODB_CONN_STRING')
-OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
-MONGODB_ATLAS_CLUSTER_URI = os.environ["MONGODB_CONN_STRING"]
+# MONGODB_CONN_STRING = os.getenv('MONGODB_CONN_STRING')
+# DB_NAME = os.getenv('DB_NAME')
+# COLLECTION_NAME = os.getenv("COLLECTION_NAME")
+# ATLAS_VECTOR_SEARCH_INDEX_NAME = os.getenv("INDEX_NAME")
+# -- Trying to access github secrets 2
+# OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
+# MONGODB_CONN_STRING = os.environ["MONGODB_CONN_STRING"]
+# DB_NAME = os.environ["DB_NAME"]
+# COLLECTION_NAME = os.environ["COLLECTION_NAME"]
+# ATLAS_VECTOR_SEARCH_INDEX_NAME = os.environ["INDEX_NAME"]
+# -- Access secrets using streamlit
+OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
+MONGODB_CONN_STRING = st.secrets["MONGODB_CONN_STRING"]
+DB_NAME = st.secrets["DB_NAME"]
+COLLECTION_NAME = st.secrets["COLLECTION_NAME"]
+ATLAS_VECTOR_SEARCH_INDEX_NAME = st.secrets["INDEX_NAME"]
 
 def format_docs(docs):
     return "\n\n".join([d.page_content for d in docs])
@@ -65,20 +80,15 @@ def rag_chain(retriever):
     return chain
 
 # initialize MongoDB python client
-client = MongoClient(MONGODB_ATLAS_CLUSTER_URI)
+client = MongoClient(MONGODB_CONN_STRING)
 
-# DB_NAME = os.getenv('DB_NAME')
-# COLLECTION_NAME = os.getenv("COLLECTION_NAME")
-# ATLAS_VECTOR_SEARCH_INDEX_NAME = os.getenv("INDEX_NAME")
-DB_NAME = os.environ["DB_NAME"]
-COLLECTION_NAME = os.environ["COLLECTION_NAME"]
-ATLAS_VECTOR_SEARCH_INDEX_NAME = os.environ["INDEX_NAME"]
+
 
 MONGODB_COLLECTION = client[DB_NAME][COLLECTION_NAME]
 
 # Load MongoDBAtlas
 vectorstore_mmembd = MongoDBAtlasVectorSearch.from_connection_string(
-    MONGODB_ATLAS_CLUSTER_URI,
+    MONGODB_CONN_STRING,
     DB_NAME + "." + COLLECTION_NAME,
     OpenAIEmbeddings(disallowed_special=()),
     index_name=ATLAS_VECTOR_SEARCH_INDEX_NAME,
