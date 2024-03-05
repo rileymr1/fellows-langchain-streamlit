@@ -3,20 +3,20 @@ import io
 from pathlib import Path
 
 from langchain_openai import ChatOpenAI
-from langchain_community.vectorstores import Chroma
-from langchain_core.documents import Document
-from langchain_core.messages import HumanMessage
+# from langchain_community.vectorstores import Chroma
+# from langchain_core.documents import Document
+# from langchain_core.messages import HumanMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.pydantic_v1 import BaseModel
 from langchain_core.runnables import RunnableLambda, RunnablePassthrough
-from langchain_experimental.open_clip import OpenCLIPEmbeddings
-from PIL import Image
+# from langchain_experimental.open_clip import OpenCLIPEmbeddings
+# from PIL import Image
 from langchain_core.prompts import ChatPromptTemplate
 # from dotenv import load_dotenv, dotenv_values
 
-import getpass
+# import getpass
 import os
-import params
+# import params
 from langchain_community.vectorstores import MongoDBAtlasVectorSearch
 from langchain_openai import OpenAIEmbeddings
 from pymongo import MongoClient

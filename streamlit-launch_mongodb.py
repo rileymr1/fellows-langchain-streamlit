@@ -1,5 +1,5 @@
 import streamlit as st
-import os
+# import os
 # from dotenv import load_dotenv, dotenv_values
 from chain_mongodb import chain as rag_chroma_multi_modal_chain
 
