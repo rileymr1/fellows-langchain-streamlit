@@ -10,11 +10,6 @@ def generate_response(input_text):
     llm = rag_chroma_multi_modal_chain
     st.info(llm.invoke(input_text))
 
-# For debugging without launching to streamlit
-def generate_response_terminal(input_text):
-    llm = rag_chroma_multi_modal_chain
-    print(llm.invoke(input_text))
-
 with st.form('my_form'):
     text = st.text_area('Enter text:', 'What is the rubric for leads on a slide? Be detailed in your response.')
     submitted = st.form_submit_button('Submit')
