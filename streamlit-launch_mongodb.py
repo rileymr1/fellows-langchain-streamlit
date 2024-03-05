@@ -6,6 +6,9 @@ from getStreamlitIP import external_ip as ip
 
 st.title('🦜🔗 FellowsGPT')
 
+# Get streamlit cloud IP address so I can add to mongodb whitelisted IP addresses
+st.write(ip) 
+
 OPENAI_API_KEY = st.sidebar.text_input('OpenAI API Key', type='password')
 
 # load_dotenv()
@@ -29,6 +32,3 @@ with st.form('my_form'):
         generate_response(text)
 
 # generate_response_terminal("What is the rubric for leads on a slide?")
-        
-# Get streamlit cloud IP address so I can add to mongodb whitelisted IP addresses
-print(ip)
