@@ -6,12 +6,10 @@ requests
 bs4
 openai
 tiktoken
-dotenv
 langchain[all]
 langchain
 openai
 langchain-openai
-langchain_openai
 langchain-community
 langchain-core
 streamlit
