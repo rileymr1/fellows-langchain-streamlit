@@ -1,18 +1,10 @@
 import streamlit as st
-# import os
-# from dotenv import load_dotenv, dotenv_values
 from chain_mongodb import chain as rag_chroma_multi_modal_chain
 from getStreamlitIP import external_ip as ip
 
-st.title('🦜🔗 FellowsGPT')
-
-# Get streamlit cloud IP address so I can add to mongodb whitelisted IP addresses
-st.write(ip) 
+st.title('🏥 FellowsGPT')
 
 OPENAI_API_KEY = st.sidebar.text_input('OpenAI API Key', type='password')
-
-# load_dotenv()
-# OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 def generate_response(input_text):
     llm = rag_chroma_multi_modal_chain
@@ -30,5 +22,3 @@ with st.form('my_form'):
         st.warning('Please enter your OpenAI API key!', icon='⚠')
     if submitted and OPENAI_API_KEY.startswith('sk-'):
         generate_response(text)
-
-# generate_response_terminal("What is the rubric for leads on a slide?")

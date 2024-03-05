@@ -1,44 +1,17 @@
-# import base64
-# import io
-# from pathlib import Path
-
 import streamlit as st
+import os
 from langchain_openai import ChatOpenAI
-# from langchain_community.vectorstores import Chroma
-# from langchain_core.documents import Document
-# from langchain_core.messages import HumanMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.pydantic_v1 import BaseModel
 from langchain_core.runnables import RunnableLambda, RunnablePassthrough
-# from langchain_experimental.open_clip import OpenCLIPEmbeddings
-# from PIL import Image
 from langchain_core.prompts import ChatPromptTemplate
-# from dotenv import load_dotenv, dotenv_values
 
-# import getpass
-import os
 # import params
 from langchain_community.vectorstores import MongoDBAtlasVectorSearch
 from langchain_openai import OpenAIEmbeddings
 from pymongo import MongoClient
 
-# Delete previous os environment variables that stuck around
-# del os.environ['OPENAI_API_KEY']
-# load_dotenv()
-
-# -- Trying to access github secrets 1. Works locally.
-# OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
-# MONGODB_CONN_STRING = os.getenv('MONGODB_CONN_STRING')
-# DB_NAME = os.getenv('DB_NAME')
-# COLLECTION_NAME = os.getenv("COLLECTION_NAME")
-# ATLAS_VECTOR_SEARCH_INDEX_NAME = os.getenv("INDEX_NAME")
-# -- Trying to access github secrets 2
-# OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
-# MONGODB_CONN_STRING = os.environ["MONGODB_CONN_STRING"]
-# DB_NAME = os.environ["DB_NAME"]
-# COLLECTION_NAME = os.environ["COLLECTION_NAME"]
-# ATLAS_VECTOR_SEARCH_INDEX_NAME = os.environ["INDEX_NAME"]
-# -- Access secrets using streamlit
+# Access secrets using streamlit
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 MONGODB_CONN_STRING = st.secrets["MONGODB_CONN_STRING"]
 DB_NAME = st.secrets["DB_NAME"]
@@ -81,8 +54,6 @@ def rag_chain(retriever):
 
 # initialize MongoDB python client
 client = MongoClient(MONGODB_CONN_STRING)
-
-
 
 MONGODB_COLLECTION = client[DB_NAME][COLLECTION_NAME]
 
