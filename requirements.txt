@@ -8,3 +8,7 @@ openai
 tiktoken
 dotenv
 langchain[all]
+langchain
+openai
+streamlit
+streamlit-chat
