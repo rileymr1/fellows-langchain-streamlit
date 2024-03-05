@@ -12,5 +12,7 @@ openai
 langchain-openai
 langchain-community
 langchain-core
+langchain_experimental
+langchain-experimental
 streamlit
 streamlit-chat
