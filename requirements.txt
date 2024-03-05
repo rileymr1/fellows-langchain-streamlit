@@ -10,5 +10,8 @@ dotenv
 langchain[all]
 langchain
 openai
+langchain-openai
+langchain-community
+langchain-core
 streamlit
 streamlit-chat
