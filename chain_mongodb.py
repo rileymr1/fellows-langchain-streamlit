@@ -12,7 +12,7 @@ from langchain_core.runnables import RunnableLambda, RunnablePassthrough
 from langchain_experimental.open_clip import OpenCLIPEmbeddings
 from PIL import Image
 from langchain_core.prompts import ChatPromptTemplate
-from dotenv import load_dotenv, dotenv_values
+# from dotenv import load_dotenv, dotenv_values
 
 import getpass
 import os
@@ -22,11 +22,13 @@ from langchain_openai import OpenAIEmbeddings
 from pymongo import MongoClient
 
 # Delete previous os environment variables that stuck around
-del os.environ['OPENAI_API_KEY']
-load_dotenv()
+# del os.environ['OPENAI_API_KEY']
+# load_dotenv()
 
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
-MONGODB_ATLAS_CLUSTER_URI = os.getenv('MONGODB_CONN_STRING')
+# OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+# MONGODB_ATLAS_CLUSTER_URI = os.getenv('MONGODB_CONN_STRING')
+OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
+MONGODB_ATLAS_CLUSTER_URI = os.environ["MONGODB_CONN_STRING"]
 
 def format_docs(docs):
     return "\n\n".join([d.page_content for d in docs])
@@ -65,9 +67,12 @@ def rag_chain(retriever):
 # initialize MongoDB python client
 client = MongoClient(MONGODB_ATLAS_CLUSTER_URI)
 
-DB_NAME = os.getenv('DB_NAME')
-COLLECTION_NAME = os.getenv("COLLECTION_NAME")
-ATLAS_VECTOR_SEARCH_INDEX_NAME = os.getenv("INDEX_NAME")
+# DB_NAME = os.getenv('DB_NAME')
+# COLLECTION_NAME = os.getenv("COLLECTION_NAME")
+# ATLAS_VECTOR_SEARCH_INDEX_NAME = os.getenv("INDEX_NAME")
+DB_NAME = os.environ["DB_NAME"]
+COLLECTION_NAME = os.environ["COLLECTION_NAME"]
+ATLAS_VECTOR_SEARCH_INDEX_NAME = os.environ["INDEX_NAME"]
 
 MONGODB_COLLECTION = client[DB_NAME][COLLECTION_NAME]
 
