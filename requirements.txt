@@ -11,6 +11,7 @@ langchain[all]
 langchain
 openai
 langchain-openai
+langchain_openai
 langchain-community
 langchain-core
 streamlit
